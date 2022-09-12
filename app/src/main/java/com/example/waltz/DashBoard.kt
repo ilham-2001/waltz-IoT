@@ -23,42 +23,32 @@ class DashBoard : AppCompatActivity() {
         val actionBar = supportActionBar
         actionBar!!.hide()
 
-        connect(applicationContext)
+        val clientID = MqttClient.generateClientId()
+        connect(this, clientID)
     }
 
-    private fun connect(context: Context) {
+    private fun connect(context: Context, clientID: String) {
         val serverURI = "tcp://broker.hivemq.com:1883"
-        mqttClient = MqttAndroidClient(context, serverURI, "kotlin_client")
+        Log.d(TAG, context.toString())
+        mqttClient = MqttAndroidClient(context, serverURI, clientID)
 
-        mqttClient.setCallback(object: MqttCallback {
-            override fun connectionLost(cause: Throwable?) {
-                TODO("Not yet implemented")
-            }
+        Log.d(TAG, "trying to connect")
 
-            override fun messageArrived(topic: String?, message: MqttMessage?) {
-                TODO("Not yet implemented")
-            }
-
-            override fun deliveryComplete(token: IMqttDeliveryToken?) {
-                TODO("Not yet implemented")
-            }
-        })
-
-        val options = MqttConnectOptions()
         try {
-            Log.d(TAG, "Trying to connect")
-            mqttClient.connect(options, null, object: IMqttActionListener {
+            val token = mqttClient.connect()
+
+            token.actionCallback = object : IMqttActionListener {
                 override fun onSuccess(asyncActionToken: IMqttToken?) {
                     Toast.makeText(this@DashBoard, "Connected", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
-                    Toast.makeText(this@DashBoard, "Failed", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "Error")
                 }
 
-            })
+            }
         } catch (e: MqttException) {
-            Log.d(TAG, "Error on connection")
+            Log.d(TAG, "Error when trying to connect")
         }
     }
 }
