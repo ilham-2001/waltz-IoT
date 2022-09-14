@@ -37,16 +37,16 @@
                 android:layout_width="155dp"
                 android:layout_height="120dp"
                 android:layout_marginTop="40dp"
-                app:cardElevation="20dp"
+                app:cardElevation="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-black"
-                    android:text="DASHBOARD" />
+                    android:src="@drawable/dashboard"/>
 
             </androidx.cardview.widget.CardView>
 
@@ -55,16 +55,16 @@
                 android:layout_width="155dp"
                 android:layout_height="120dp"
                 android:layout_marginTop="160dp"
-                app:cardElevation="20dp"
+                app:cardElevation="10dp"
                 app:layout_constraintEnd_toEndOf="@id/cv_dashboard"
                 app:layout_constraintStart_toStartOf="@id/cv_dashboard"
                 app:layout_constraintTop_toTopOf="@id/cv_dashboard">
 
-                <TextView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-black"
-                    android:text="Payment" />
+                    android:src="@drawable/e_payment"/>
 
             </androidx.cardview.widget.CardView>
 
