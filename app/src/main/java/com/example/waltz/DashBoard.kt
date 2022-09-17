@@ -1,7 +1,6 @@
 package com.example.waltz
 
 import android.content.Context
-import android.nfc.Tag
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,12 +10,10 @@ import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import org.eclipse.paho.android.service.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.*
-import java.sql.Timestamp
 import java.text.SimpleDateFormat
-import java.util.*
-import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 class DashBoard : AppCompatActivity() {
@@ -111,32 +108,65 @@ class DashBoard : AppCompatActivity() {
         return month    }
 
     private fun setLineChart() {
-        val linevalues = ArrayList<Entry>()
-        linevalues.add(Entry(1f, 580F))
-        linevalues.add(Entry(2f, 560F))
-        linevalues.add(Entry(3f, 650F))
-        linevalues.add(Entry(4f, 700F))
-        linevalues.add(Entry(5f, 740F))
-        linevalues.add(Entry(6f, 790F))
-        linevalues.add(Entry(7f, 840F))
-        linevalues.add(Entry(8f, 880F))
-        linevalues.add(Entry(9f, 930F))
-        linevalues.add(Entry(10f, 950F))
-        linevalues.add(Entry(11f, 1_012F))
+        val realCostValues = ArrayList<Entry>()
+        realCostValues.add(Entry(1f, 580F))
+        realCostValues.add(Entry(2f, 560F))
+        realCostValues.add(Entry(3f, 650F))
+        realCostValues.add(Entry(4f, 700F))
+        realCostValues.add(Entry(5f, 740F))
+        realCostValues.add(Entry(6f, 790F))
+        realCostValues.add(Entry(7f, 840F))
+        realCostValues.add(Entry(8f, 880F))
+        realCostValues.add(Entry(9f, 1_230F))
+        realCostValues.add(Entry(10f, 1_105F))
+        realCostValues.add(Entry(11f, 1_012F))
+        realCostValues.add(Entry(12f, 912F))
 
-        val linedataset = LineDataSet(linevalues, "First")
+        val predictedCostValues = ArrayList<Entry>()
+        predictedCostValues.add(Entry(1f, 580F))
+        predictedCostValues.add(Entry(2f, 560F))
+        predictedCostValues.add(Entry(3f, 650F))
+        predictedCostValues.add(Entry(4f, 700F))
+        predictedCostValues.add(Entry(5f, 740F))
+        predictedCostValues.add(Entry(6f, 790F))
+        predictedCostValues.add(Entry(7f, 840F))
+        predictedCostValues.add(Entry(8f, 880F))
+        predictedCostValues.add(Entry(9f, 930F))
+        predictedCostValues.add(Entry(10f, 950F))
+        predictedCostValues.add(Entry(11f, 1_012F))
+        predictedCostValues.add(Entry(12f, 1_412F))
+
+        val lineRCV = LineDataSet(realCostValues, "Real Cost")
+        val linePCV = LineDataSet(predictedCostValues, "Predicted Cost")
         //We add features to our chart
-        linedataset.color = resources.getColor(R.color.black)
-//        linedataset.color = resources.getColor()
+        lineRCV.color = resources.getColor(R.color.main)
+        linePCV.color = resources.getColor(R.color.purple_200)
 
-        linedataset.circleRadius = 2f
-        linedataset.setDrawFilled(true)
-        linedataset.valueTextSize = 10f
-        linedataset.fillColor = resources.getColor(R.color.main)
-        linedataset.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        // Real Cost Values
+        lineRCV.circleRadius = 2f
+        lineRCV.setDrawFilled(true)
+        lineRCV.valueTextSize = 10f
+        lineRCV.fillColor = resources.getColor(R.color.main)
+        lineRCV.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 
-        val data = LineData(linedataset)
-        kwhChart.data = data
+        // Predicted Cost Values
+        linePCV.circleRadius = 2f
+        linePCV.setDrawFilled(true)
+        linePCV.valueTextSize = 10f
+        linePCV.fillColor = resources.getColor(R.color.purple_200)
+        linePCV.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+
+        val data = ArrayList<LineDataSet>()
+        data.add(lineRCV)
+        data.add(linePCV)
+
+//        val RCVData = LineData(lineRCV)
+//        val PCVData = LineData(linePCV)
+        val lineData = LineData(data as List <ILineDataSet>?)
+
+//        kwhChart.data = RCVData
+//        kwhChart.data = PCVData
+        kwhChart.data = lineData
         kwhChart.setBackgroundColor(resources.getColor(R.color.white))
         kwhChart.animateXY(2000, 2000, Easing.EaseInCubic)
 
