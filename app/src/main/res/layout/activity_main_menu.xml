@@ -18,7 +18,17 @@
         app:layout_constraintStart_toStartOf="@id/root"
         app:layout_constraintTop_toTopOf="@id/root" />
 
+    <!--    <ImageView-->
+    <!--        android:layout_width="80dp"-->
+    <!--        android:layout_height="80dp"-->
+    <!--        android:src="@drawable/logo_pln"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintBottom_toTopOf="@id/cv_menu_holder"/>-->
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/cv_menu_holder"
         android:layout_width="match_parent"
         android:layout_height="550dp"
         android:layout_marginTop="250dp"
@@ -34,37 +44,70 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_dashboard"
-                android:layout_width="155dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="40dp"
+                android:layout_width="185dp"
+                android:layout_height="148dp"
+                android:layout_marginTop="80dp"
+                app:cardCornerRadius="8dp"
                 app:cardElevation="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-black"
-                    android:src="@drawable/dashboard"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_dashboard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="120dp"
+                        android:fontFamily="sans-serif-black"
+                        android:src="@drawable/dashboard" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="Dashboard" />
+
+                </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_payment"
-                android:layout_width="155dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="160dp"
+                android:layout_width="185dp"
+                android:layout_height="148dp"
+                android:layout_marginTop="200dp"
+                app:cardCornerRadius="8dp"
                 app:cardElevation="10dp"
                 app:layout_constraintEnd_toEndOf="@id/cv_dashboard"
                 app:layout_constraintStart_toStartOf="@id/cv_dashboard"
                 app:layout_constraintTop_toTopOf="@id/cv_dashboard">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-black"
-                    android:src="@drawable/e_payment"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="120dp"
+                        android:fontFamily="sans-serif-black"
+                        android:src="@drawable/e_payment" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="Payment" />
+
+                </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 

@@ -5,14 +5,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/kwh_chart"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="50dp"
+    <HorizontalScrollView
+        android:id="@+id/hsv_chart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/kwh_chart"
+                android:layout_width="320dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="50dp"
+                app:layout_constraintEnd_toStartOf="@id/cost_monthly_chart"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="45dp"/>
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/cost_monthly_chart"
+                android:layout_width="320dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/kwh_chart"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="45dp"
+                android:layout_marginEnd="45dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </HorizontalScrollView>
 
     <HorizontalScrollView
         android:id="@+id/svDashboard"
@@ -20,7 +50,7 @@
         android:layout_height="120dp"
         android:layout_marginTop="10dp"
         android:scrollbars="none"
-        app:layout_constraintTop_toBottomOf="@id/kwh_chart">
+        app:layout_constraintTop_toBottomOf="@id/hsv_chart">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,13 +65,31 @@
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="sans-serif-black"
-                    android:text="Cost Estimation" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/iv_CE"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="Cost Estimation" />
+
+                    <TextView
+                        android:layout_marginTop="20dp"
+                        app:layout_constraintTop_toBottomOf="@id/iv_CE"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NULL"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
 
@@ -100,10 +148,11 @@
                 android:id="@+id/pb_arus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toStartOf="@id/pb_tegangan"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:orientation="vertical">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -123,14 +172,16 @@
                 android:id="@+id/pb_tegangan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/pb_arus"
-                app:layout_constraintTop_toTopOf="parent"
-                android:orientation="vertical">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:baselineAligned="false"
                     android:fontFamily="sans-serif-black"
                     android:text="Tegangan" />
 
