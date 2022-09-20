@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Waltz</string>
+    <string name="default_value">NULL</string>
+    <string name="used_power">Daya Aktif</string>
+    <string name="used_electricity">Energi Terpakai</string>
+    <string name="cost_estimation">Estimasi Biaya</string>
+    <string name="current">Arus</string>
+    <string name="voltage">Tegangan</string>
 </resources>

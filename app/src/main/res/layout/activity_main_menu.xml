@@ -7,6 +7,7 @@
     android:background="@color/main">
 
     <TextView
+        android:id="@+id/tv_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -17,6 +18,25 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@id/root"
         app:layout_constraintTop_toTopOf="@id/root" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        app:cardCornerRadius="15dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_welcome">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Summary"/>
+
+    </androidx.cardview.widget.CardView>
 
     <!--    <ImageView-->
     <!--        android:layout_width="80dp"-->
@@ -32,6 +52,7 @@
         android:layout_height="550dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:translationZ="20dp"
         app:layout_constraintStart_toStartOf="parent">
 
         <FrameLayout

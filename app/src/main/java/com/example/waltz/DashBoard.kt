@@ -90,18 +90,19 @@ class DashBoard : AppCompatActivity() {
 
     private fun formatValueHour(value: Float): String {
         val month = when (value) {
-            1f -> "00"
-            2f -> "01"
-            3f -> "02"
-            4f -> "03"
-            5f -> "04"
-            6f -> "05"
-            7f -> "06"
-            8f -> "07"
-            9f -> "08"
-            10f -> "09"
-            11f -> "10"
-            12f -> "11"
+            0f -> "00:00"
+            1f, 13f -> "01:00"
+            2f, 14f -> "02:00"
+            3f, 15f -> "03:00"
+            4f, 16f -> "04:00"
+            5f, 17f -> "05:00"
+            6f, 18f -> "06:00"
+            7f, 19f -> "07:00"
+            8f, 20f -> "08:00"
+            9f, 21f -> "09:00"
+            10f, 22f -> "10:00"
+            11f, 23f -> "11:00"
+            12f, 24f -> "12:00"
             else -> ""
         }
 
@@ -160,12 +161,8 @@ class DashBoard : AppCompatActivity() {
         data.add(lineRCV)
         data.add(linePCV)
 
-//        val RCVData = LineData(lineRCV)
-//        val PCVData = LineData(linePCV)
         val lineData = LineData(data as List <ILineDataSet>?)
 
-//        kwhChart.data = RCVData
-//        kwhChart.data = PCVData
         kwhChart.data = lineData
         kwhChart.setBackgroundColor(resources.getColor(R.color.white))
         kwhChart.animateXY(2000, 2000, Easing.EaseInCubic)
