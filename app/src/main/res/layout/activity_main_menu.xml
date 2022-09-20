@@ -22,7 +22,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="300dp"
         android:layout_height="150dp"
-        app:cardCornerRadius="15dp"
+        app:cardCornerRadius="10dp"
         android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -138,7 +138,7 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="5dp"
                             android:fontFamily="sans-serif-black"
-                            android:text="Payment" />
+                            android:text="Coming Soon" />
 
                     </LinearLayout>
 

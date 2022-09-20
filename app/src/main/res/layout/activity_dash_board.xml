@@ -34,7 +34,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-black"
-                    android:text="Kwh Daily Monitor"
+                    android:text="Monitor Kwh Harian"
                     android:textSize="12sp" />
 
                 <com.github.mikephil.charting.charts.LineChart
@@ -61,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-black"
-                    android:text="Monthly Cost History"
+                    android:text="Riwayat Pengeluaran Bulanan"
                     android:textSize="12sp" />
 
                 <com.github.mikephil.charting.charts.BarChart
@@ -109,6 +109,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="sans-serif-black"
                         android:text="@string/cost_estimation"
+                        android:textSize="12sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -145,6 +146,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="sans-serif-black"
                         android:text="@string/used_electricity"
+                        android:textSize="12sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -181,6 +183,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="sans-serif-black"
                         android:text="@string/used_power"
+                        android:textSize="12sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -226,7 +229,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-black"
-                    android:text="@string/current" />
+                    android:text="@string/current"
+                    android:textSize="12sp" />
 
                 <ProgressBar
                     style="?android:attr/progressBarStyle"
@@ -251,7 +255,8 @@
                     android:layout_height="wrap_content"
                     android:baselineAligned="false"
                     android:fontFamily="sans-serif-black"
-                    android:text="@string/voltage" />
+                    android:text="@string/voltage"
+                    android:textSize="12sp" />
 
                 <ProgressBar
                     style="?android:attr/progressBarStyle"

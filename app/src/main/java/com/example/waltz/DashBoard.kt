@@ -15,6 +15,7 @@ import org.eclipse.paho.android.service.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.*
 import java.text.SimpleDateFormat
 import kotlin.collections.ArrayList
+import com.example.waltzLib.DynamicList
 
 class DashBoard : AppCompatActivity() {
 
@@ -109,7 +110,7 @@ class DashBoard : AppCompatActivity() {
         return month    }
 
     private fun setLineChart() {
-        val realCostValues = ArrayList<Entry>()
+        val realCostValues = DynamicList(100)
         realCostValues.add(Entry(1f, 580F))
         realCostValues.add(Entry(2f, 560F))
         realCostValues.add(Entry(3f, 650F))
@@ -123,7 +124,7 @@ class DashBoard : AppCompatActivity() {
         realCostValues.add(Entry(11f, 1_012F))
         realCostValues.add(Entry(12f, 912F))
 
-        val predictedCostValues = ArrayList<Entry>()
+        val predictedCostValues = DynamicList(100)
         predictedCostValues.add(Entry(1f, 580F))
         predictedCostValues.add(Entry(2f, 560F))
         predictedCostValues.add(Entry(3f, 650F))
@@ -137,8 +138,8 @@ class DashBoard : AppCompatActivity() {
         predictedCostValues.add(Entry(11f, 1_012F))
         predictedCostValues.add(Entry(12f, 1_412F))
 
-        val lineRCV = LineDataSet(realCostValues, "Real Cost")
-        val linePCV = LineDataSet(predictedCostValues, "Predicted Cost")
+        val lineRCV = LineDataSet(realCostValues.getList(), "Real Cost")
+        val linePCV = LineDataSet(predictedCostValues.getList(), "Predicted Cost")
         //We add features to our chart
         lineRCV.color = resources.getColor(R.color.main)
         linePCV.color = resources.getColor(R.color.purple_200)
