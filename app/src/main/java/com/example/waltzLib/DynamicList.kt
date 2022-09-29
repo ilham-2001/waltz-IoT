@@ -7,7 +7,7 @@ class DynamicList(size: Int) {
     private var maxSize: Int = size
 
     fun add(data: Entry){
-        if (list.size < this.maxSize) {
+        if (this.list.size < this.maxSize) {
             list.add(data)
             return
         }

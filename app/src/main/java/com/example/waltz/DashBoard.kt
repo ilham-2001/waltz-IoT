@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
@@ -22,6 +23,9 @@ class DashBoard : AppCompatActivity() {
     private lateinit var mqttClient: MqttAndroidClient
     private lateinit var kwhChart: LineChart
     private lateinit var monthlyCost: BarChart
+    private  lateinit var tvCEValue: TextView
+    private  lateinit var tvUPValue: TextView
+    private  lateinit var tvUEValue: TextView
 
     companion object {
         const val TAG = "AndroidMqttClient"
@@ -40,6 +44,9 @@ class DashBoard : AppCompatActivity() {
         // dummy test data
         kwhChart = findViewById(R.id.kwh_chart)
         monthlyCost = findViewById(R.id.cost_monthly_chart)
+        tvCEValue = findViewById(R.id.tv_CE_val)
+        tvUPValue = findViewById(R.id.tv_UP_val)
+        tvUEValue = findViewById(R.id.tv_UE_val)
         setLineChart()
         setBarChart()
     }
@@ -49,14 +56,13 @@ class DashBoard : AppCompatActivity() {
         Log.d(TAG, context.toString())
         mqttClient = MqttAndroidClient(context, serverURI, clientID)
 
-//        Log.d(TAG, "trying to connect")
-
         try {
             val token = mqttClient.connect()
 
             token.actionCallback = object : IMqttActionListener {
                 override fun onSuccess(asyncActionToken: IMqttToken?) {
                     Toast.makeText(this@DashBoard, "Connected", Toast.LENGTH_SHORT).show()
+                    subscribe("test", 0, mqttClient)
                 }
 
                 override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
@@ -171,21 +177,38 @@ class DashBoard : AppCompatActivity() {
         val xAxis = kwhChart.xAxis
         xAxis.granularity = 1f
         xAxis.valueFormatter = (object : ValueFormatter() {
-            private val pattern = "dd MMM yy"
-            private val mFormat = SimpleDateFormat(pattern)
-            private val inputFormat = SimpleDateFormat("yyyy-MM-dd")
-
             override fun getFormattedValue(value: Float): String {
-//                val millis = TimeUnit.HOURS.toMillis(value.toLong())
-//                return mFormat.format(inputFormat.parse(xLabel[value.toInt()]))
-//                val date = Date(value.toLong())
-
-//                Log.d(TAG, value.toLong().toString())
-//                Log.d(TAG, value.toInt().toString())
-
                 return formatValueHour(value)
             }
         })
+    }
+
+    private fun subscribe(topic: String, qos: Int, client: MqttAndroidClient) {
+        try {
+            client.subscribe(topic, qos)
+            client.setCallback(object : MqttCallback {
+                override fun connectionLost(cause: Throwable?) {
+                    // NOT IMPLEMENTED
+                }
+
+                override fun messageArrived(topic: String?, message: MqttMessage?) {
+                    Log.d(TAG, "msg")
+                    if (topic == "test") {
+                        Log.d(TAG, "Message is arrive: " + message.toString())
+                        tvCEValue.text = message.toString()
+                        tvUPValue.text = message.toString()
+                        tvUEValue.text = message.toString()
+                    }
+                }
+
+                override fun deliveryComplete(token: IMqttDeliveryToken?) {
+                    // NOT IMPLEMENTED
+                }
+
+            })
+        } catch (e: MqttException) {
+            Log.e(TAG, "Error on retrieving message")
+        }
     }
 
     private fun setBarChart() {
