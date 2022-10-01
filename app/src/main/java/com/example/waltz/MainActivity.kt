@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         tvLogo.animation = bottomAnimation
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, MainMenu::class.java)
+            val intent = Intent(this, StartingMenu::class.java)
             startActivity(intent)
             finish()
         }, SPLASH_SCREEN.toLong())

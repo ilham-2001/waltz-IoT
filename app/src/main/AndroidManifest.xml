@@ -21,10 +21,12 @@
             android:name=".DashBoard"
             android:exported="false"
             android:label="Dashboard"
-            android:parentActivityName=".MainMenu"/>
+            android:parentActivityName=".MainMenu" />
         <activity
             android:name=".MainMenu"
             android:exported="false" />
+        <activity android:name=".StartingMenu"
+            android:exported="false"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

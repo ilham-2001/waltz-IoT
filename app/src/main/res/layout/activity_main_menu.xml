@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main">
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/tv_welcome"
@@ -14,45 +15,241 @@
         android:layout_marginTop="20dp"
         android:fontFamily="sans-serif-black"
         android:text="Welcome!"
-        android:textColor="@color/white"
+        android:textColor="@color/secondary"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/root"
         app:layout_constraintTop_toTopOf="@id/root" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        app:cardCornerRadius="15dp"
-        android:layout_marginTop="50dp"
+        android:id="@+id/cv_summary"
+        android:layout_width="350dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="15dp"
+        app:cardBackgroundColor="@color/secondary"
+        app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_welcome">
+        app:layout_constraintTop_toBottomOf="@id/tv_welcome">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="sans-serif-black"
-            android:text="Summary"/>
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnCount="2"
+            android:rowCount="1">
+
+            <androidx.cardview.widget.CardView
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                app:cardBackgroundColor="@color/secondary">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tv_kwh_val"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="300"
+                        android:textColor="@color/white"
+                        android:textSize="32sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_title_kwh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="47dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text=" kWh"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toEndOf="@id/tv_kwh_val"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="Total kWh"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_kwh_val" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                app:cardBackgroundColor="@color/secondary">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tv_harga_kwh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="250K"
+                        android:textColor="@color/light_green"
+                        android:textSize="32sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-black"
+                        android:text="Total Harga"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_harga_kwh" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </GridLayout>
 
     </androidx.cardview.widget.CardView>
 
-    <!--    <ImageView-->
-    <!--        android:layout_width="80dp"-->
-    <!--        android:layout_height="80dp"-->
-    <!--        android:src="@drawable/logo_pln"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintBottom_toTopOf="@id/cv_menu_holder"/>-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_power_usage"
+        android:layout_width="350dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="100dp"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cv_summary">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnCount="2"
+            android:rowCount="1">
+
+            <FrameLayout
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1">
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="10dp"
+                    android:indeterminateDrawable="@drawable/cs" />
+
+            </FrameLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="2">
+
+                <ImageView
+                    android:id="@+id/iv_power_icon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/vector"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_usage_electricity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="% Usage"
+                    app:layout_constraintStart_toEndOf="@id/iv_power_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_total_electricity_usage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Total Electricity Usage"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_usage_electricity" />
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="NEED TO BE FILLED"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_total_electricity_usage" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </GridLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/main_menu"
+        app:layout_constraintTop_toBottomOf="@id/cv_summary" />
+    
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cv_power_usage"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:fontFamily="sans-serif-black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Usage History"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/usage_history_template"/>
+
+    </LinearLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/cl_bottom"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="470dp"
+        android:translationZ="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:translationZ="20dp"
         app:layout_constraintStart_toStartOf="parent">
 
         <FrameLayout
@@ -138,7 +335,7 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="5dp"
                             android:fontFamily="sans-serif-black"
-                            android:text="Payment" />
+                            android:text="Coming Soon" />
 
                     </LinearLayout>
 
@@ -146,97 +343,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         </FrameLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <!--    <androidx.cardview.widget.CardView-->
-    <!--        android:id="@+id/cv_menu_holder"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="550dp"-->
-    <!--        android:layout_marginTop="250dp"-->
-    <!--        android:background="@color/white"-->
-    <!--        android:orientation="vertical"-->
-    <!--        app:cardCornerRadius="45dp"-->
-    <!--        app:layout_constraintBottom_toBottomOf="@id/root"-->
-    <!--        app:layout_constraintTop_toTopOf="parent">-->
-
-    <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent">-->
-
-    <!--            <androidx.cardview.widget.CardView-->
-    <!--                android:id="@+id/cv_dashboard"-->
-    <!--                android:layout_width="185dp"-->
-    <!--                android:layout_height="148dp"-->
-    <!--                android:layout_marginTop="80dp"-->
-    <!--                app:cardCornerRadius="8dp"-->
-    <!--                app:cardElevation="10dp"-->
-    <!--                app:layout_constraintEnd_toEndOf="parent"-->
-    <!--                app:layout_constraintStart_toStartOf="parent"-->
-    <!--                app:layout_constraintTop_toTopOf="parent">-->
-
-    <!--                <LinearLayout-->
-    <!--                    android:layout_width="match_parent"-->
-    <!--                    android:layout_height="match_parent"-->
-    <!--                    android:orientation="vertical">-->
-
-    <!--                    <ImageView-->
-    <!--                        android:id="@+id/iv_dashboard"-->
-    <!--                        android:layout_width="wrap_content"-->
-    <!--                        android:layout_height="120dp"-->
-    <!--                        android:fontFamily="sans-serif-black"-->
-    <!--                        android:src="@drawable/dashboard" />-->
-
-    <!--                    <TextView-->
-    <!--                        android:layout_width="wrap_content"-->
-    <!--                        android:layout_height="wrap_content"-->
-    <!--                        android:layout_gravity="center"-->
-    <!--                        android:layout_marginTop="5dp"-->
-    <!--                        android:fontFamily="sans-serif-black"-->
-    <!--                        android:text="Dashboard" />-->
-
-    <!--                </LinearLayout>-->
-
-    <!--            </androidx.cardview.widget.CardView>-->
-
-    <!--            <androidx.cardview.widget.CardView-->
-    <!--                android:id="@+id/cv_payment"-->
-    <!--                android:layout_width="185dp"-->
-    <!--                android:layout_height="148dp"-->
-    <!--                android:layout_marginTop="200dp"-->
-    <!--                app:cardCornerRadius="8dp"-->
-    <!--                app:cardElevation="10dp"-->
-    <!--                app:layout_constraintEnd_toEndOf="@id/cv_dashboard"-->
-    <!--                app:layout_constraintStart_toStartOf="@id/cv_dashboard"-->
-    <!--                app:layout_constraintTop_toTopOf="@id/cv_dashboard">-->
-
-    <!--                <LinearLayout-->
-    <!--                    android:layout_width="match_parent"-->
-    <!--                    android:layout_height="match_parent"-->
-    <!--                    android:orientation="vertical">-->
-
-    <!--                    <ImageView-->
-    <!--                        android:layout_width="wrap_content"-->
-    <!--                        android:layout_height="120dp"-->
-    <!--                        android:fontFamily="sans-serif-black"-->
-    <!--                        android:src="@drawable/e_payment" />-->
-
-    <!--                    <TextView-->
-    <!--                        android:layout_width="wrap_content"-->
-    <!--                        android:layout_height="wrap_content"-->
-    <!--                        android:layout_gravity="center"-->
-    <!--                        android:layout_marginTop="5dp"-->
-    <!--                        android:fontFamily="sans-serif-black"-->
-    <!--                        android:text="Payment" />-->
-
-    <!--                </LinearLayout>-->
-
-    <!--            </androidx.cardview.widget.CardView>-->
-
-    <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-    <!--    </androidx.cardview.widget.CardView>-->
-
 </androidx.constraintlayout.widget.ConstraintLayout>
