@@ -6,4 +6,6 @@
     <string name="cost_estimation">Estimasi Biaya</string>
     <string name="current">Arus</string>
     <string name="voltage">Tegangan</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

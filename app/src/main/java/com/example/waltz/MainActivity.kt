@@ -10,6 +10,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.waltz.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,37 +18,30 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var topAnimation: Animation
     private lateinit var  bottomAnimation: Animation
-
-    private lateinit var ivLogo: ImageView
-    private lateinit var tvLogo: TextView
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         @Suppress("DEPRECATION")
 //        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val actionBar = supportActionBar
         actionBar!!.hide()
 
-        findComponent()
-
         topAnimation = AnimationUtils.loadAnimation(this, R.anim.top_animation)
         bottomAnimation = AnimationUtils.loadAnimation(this, R.anim.bottom_animation)
 
-        ivLogo.animation = topAnimation
-        tvLogo.animation = bottomAnimation
+        binding.ivLogo.animation = topAnimation
+        binding.tvLogo.animation = bottomAnimation
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, StartingMenu::class.java)
+            val intent = Intent(this, MainMenu::class.java)
             startActivity(intent)
             finish()
         }, SPLASH_SCREEN.toLong())
 
     }
 
-    private fun findComponent() {
-        ivLogo = findViewById(R.id.ivLogo)
-        tvLogo = findViewById(R.id.tvLogo)
-    }
 }

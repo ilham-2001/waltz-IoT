@@ -6,38 +6,44 @@ import android.os.Bundle
 import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import com.example.waltz.databinding.ActivityMainBinding
+import com.example.waltz.databinding.ActivityMainMenuBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class MainMenu : AppCompatActivity() {
 
-    private lateinit var cvDashboard: CardView
-    private lateinit var cvPayment: CardView
-    private lateinit var bsFrame: FrameLayout
+    private lateinit var binding: ActivityMainMenuBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding = ActivityMainMenuBinding.inflate(layoutInflater)
+
         val actionBar = supportActionBar
         actionBar!!.hide()
 
-        setContentView(R.layout.activity_main_menu)
+        setContentView(binding.root)
 
-        findComponent()
+        changeFragement(MainMenuFragment())
 
-        BottomSheetBehavior.from(bsFrame).apply {
-            peekHeight = 200
-            this.state = BottomSheetBehavior.STATE_COLLAPSED
-        }
-
-        cvDashboard.setOnClickListener {
-            val dashBoard = Intent(this, DashBoard::class.java)
-            startActivity(dashBoard)
+        binding.bottomNav.setOnItemSelectedListener{
+          when(it.itemId) {
+              R.id.menu_home -> changeFragement(MainMenuFragment())
+              R.id.menu_monitor -> changeFragement(MonitoringFragment())
+              R.id.menu_setting -> changeFragement(SettingFragment())
+          }
+            true
         }
     }
 
-    private fun findComponent() {
-    cvDashboard = findViewById(R.id.cv_dashboard)
-    cvPayment = findViewById(R.id.cv_payment)
-    bsFrame = findViewById(R.id.fr_mainmenu)
+    private fun changeFragement(fragment: Fragment) {
+        val fm: FragmentManager = supportFragmentManager
+        val fragTransaction: FragmentTransaction = fm.beginTransaction()
+        fragTransaction.replace(R.id.main_frame, fragment)
+        fragTransaction.commit()
     }
+
 }
