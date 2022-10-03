@@ -1,59 +1,106 @@
 package com.example.waltz
 
+import android.content.Context
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.example.waltz.databinding.FragmentMonitoringBinding
+import org.eclipse.paho.android.service.MqttAndroidClient
+import org.eclipse.paho.client.mqttv3.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MonitoringFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MonitoringFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var mqttClient: MqttAndroidClient
+
+    companion object {
+        const val TAG = "AndroidMqttClient"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
+        Log.d("TAG", "Hello, Monitoring")
+        val clientID = MqttClient.generateClientId()
+        connect(activity?.applicationContext, clientID)
     }
+
+    private var _binding: FragmentMonitoringBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_monitoring, container, false)
+        _binding = FragmentMonitoringBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MonitoringFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MonitoringFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun connect(context: Context?, clientID: String) {
+        val serverURI = "tcp://broker.hivemq.com:1883"
+        Log.d(TAG, context.toString())
+        mqttClient = MqttAndroidClient(context, serverURI, clientID)
+
+        try {
+            val token = mqttClient.connect()
+
+            token.actionCallback = object : IMqttActionListener {
+                override fun onSuccess(asyncActionToken: IMqttToken?) {
+                    Toast.makeText(activity?.applicationContext, "Connected", Toast.LENGTH_SHORT)
+                        .show()
+                    subscribe("DIIBS/gambar_masker", 0, mqttClient)
+                }
+
+                override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
+                    Log.d(TAG, "Error")
+                }
+
+            }
+        } catch (e: MqttException) {
+            Log.d(TAG, "Error when trying to connect")
+        }
+    }
+
+    private fun subscribe(topic: String, qos: Int, client: MqttAndroidClient) {
+        try {
+            client.subscribe(topic, qos)
+            client.setCallback(object : MqttCallback {
+                override fun connectionLost(cause: Throwable?) {
+                    // NOT IMPLEMENTED
+                }
+
+                override fun messageArrived(topic: String?, message: MqttMessage?) {
+                    if (topic == "DIIBS/gambar_masker") {
+                        val imageBytes = Base64.decode(message.toString(), Base64.DEFAULT)
+                        val bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+
+                        binding.ivScreen.setImageBitmap(bitmap)                    }
+                }
+
+                override fun deliveryComplete(token: IMqttDeliveryToken?) {
+                    // NOT IMPLEMENTED
+                }
+
+            })
+        } catch (e: MqttException) {
+            Log.e(TAG, "Error on retrieving message")
+        }
+    }
+
 }

@@ -38,8 +38,7 @@
             <ImageView
                 android:id="@+id/iv_screen"
                 android:layout_width="250dp"
-                android:layout_height="170dp"
-                android:src="@drawable/main_menu" />
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 
@@ -89,12 +88,13 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    android:id="@+id/tv_tgl_val"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="sans-serif-black"
-                    android:textColor="@color/white"
-                    tool:text="Tanggal Value" />
+                    android:text="-"
+                    android:textColor="@color/white" />
 
             </androidx.cardview.widget.CardView>
 
@@ -136,12 +136,13 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    android:id="@+id/tv_waktu_val"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="sans-serif-black"
-                    android:textColor="@color/white"
-                    tool:text="Waktu Value" />
+                    android:text="-"
+                    android:textColor="@color/white" />
 
             </androidx.cardview.widget.CardView>
 
@@ -183,12 +184,13 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    android:id="@+id/tv_jmlh_val"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="sans-serif-black"
-                    android:textColor="@color/white"
-                    tool:text="Jumlah Value" />
+                    android:text="-"
+                    android:textColor="@color/white" />
 
             </androidx.cardview.widget.CardView>
 
@@ -230,12 +232,13 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    android:id="@+id/tv_status_ac_val"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="sans-serif-black"
-                    android:textColor="@color/white"
-                    tool:text="Status Value" />
+                    android:text="-"
+                    android:textColor="@color/white" />
 
             </androidx.cardview.widget.CardView>
 

@@ -10,16 +10,19 @@
         <entry key="app/src/main/res/drawable/rounded_button.xml" value="0.2325" />
         <entry key="app/src/main/res/drawable/rounded_linear.xml" value="0.2325" />
         <entry key="app/src/main/res/layout/activity_dash_board.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_main_menu.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_main_menu.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_starting_menu.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_main_menu.xml" value="0.2912621359223301" />
-        <entry key="app/src/main/res/layout/fragment_monitoring.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_main_menu.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_monitoring.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.2949978623343309" />
         <entry key="app/src/main/res/layout/usage_history_template.xml" value="0.33" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1695" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1695" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/waltz-icon.xml" value="0.2325" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/waltz-icon_round.xml" value="0.2325" />
       </map>
     </option>
   </component>
@@ -28,5 +31,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
   </component>
 </project>
