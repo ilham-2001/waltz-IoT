@@ -22,9 +22,6 @@ class MainMenuActivity : AppCompatActivity() {
 
         binding = ActivityMainMenuBinding.inflate(layoutInflater)
 
-        val actionBar = supportActionBar
-        actionBar!!.hide()
-
         setContentView(binding.root)
 
         changeFragement(MainMenuFragment())

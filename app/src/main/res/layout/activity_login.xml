@@ -72,7 +72,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:layout_width="315dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginTop="36dp"
         app:cornerRadius="15dp"
         android:backgroundTint="#1E54EA"

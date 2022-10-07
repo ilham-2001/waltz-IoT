@@ -5,17 +5,22 @@
       <map>
         <entry key="app/src/main/res/drawable/btn_custom.xml" value="0.2325" />
         <entry key="app/src/main/res/drawable/home.xml" value="0.2325" />
+        <entry key="app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1315" />
         <entry key="app/src/main/res/drawable/ic_baseline_remove_24.xml" value="0.2275" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2535" />
+        <entry key="app/src/main/res/drawable/monitoring.xml" value="0.2535" />
+        <entry key="app/src/main/res/drawable/person.xml" value="0.2535" />
         <entry key="app/src/main/res/drawable/rounded.xml" value="0.2275" />
         <entry key="app/src/main/res/drawable/rounded_button.xml" value="0.2325" />
         <entry key="app/src/main/res/drawable/rounded_linear.xml" value="0.2325" />
+        <entry key="app/src/main/res/drawable/setting.xml" value="0.2535" />
         <entry key="app/src/main/res/layout/activity_dash_board.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main_menu.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_starting.xml" value="0.2949978623343309" />
         <entry key="app/src/main/res/layout/activity_starting_menu.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_main_menu.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_main_menu.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_monitoring.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.2949978623343309" />
         <entry key="app/src/main/res/layout/usage_history_template.xml" value="0.33" />

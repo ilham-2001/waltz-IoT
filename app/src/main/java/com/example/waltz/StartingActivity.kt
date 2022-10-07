@@ -15,8 +15,6 @@ class StartingActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityStartingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar!!.hide()
-
         binding.btnGetStarted.setOnClickListener(this)
         binding.btnLogin.setOnClickListener(this)
 
