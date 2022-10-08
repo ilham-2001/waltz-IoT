@@ -22,12 +22,13 @@ class MonitoringFragment : Fragment() {
         const val TAG = "AndroidMqttClient"
     }
 
+    // Life Cycle
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         Log.d("TAG", "Hello, Monitoring")
-        val clientID = MqttClient.generateClientId()
-        connect(activity?.applicationContext, clientID)
+
     }
 
     private var _binding: FragmentMonitoringBinding? = null
@@ -45,12 +46,16 @@ class MonitoringFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Connect to MQTT when everything is set up
+        val clientID = MqttClient.generateClientId()
+        connect(context, clientID)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
 
     private fun connect(context: Context?, clientID: String) {
         val serverURI = "tcp://broker.hivemq.com:1883"
@@ -62,7 +67,7 @@ class MonitoringFragment : Fragment() {
 
             token.actionCallback = object : IMqttActionListener {
                 override fun onSuccess(asyncActionToken: IMqttToken?) {
-                    Toast.makeText(activity?.applicationContext, "Connected", Toast.LENGTH_SHORT)
+                    Toast.makeText(context, "Connected", Toast.LENGTH_SHORT)
                         .show()
                     subscribe("DIIBS/gambar_masker", 0, mqttClient)
                 }
@@ -90,7 +95,8 @@ class MonitoringFragment : Fragment() {
                         val imageBytes = Base64.decode(message.toString(), Base64.DEFAULT)
                         val bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
 
-                        binding.ivScreen.setImageBitmap(bitmap)                    }
+                        binding.ivScreen.setImageBitmap(bitmap)
+                    }
                 }
 
                 override fun deliveryComplete(token: IMqttDeliveryToken?) {

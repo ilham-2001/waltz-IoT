@@ -7,7 +7,7 @@
     android:background="@color/secondary">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ll_topMenu"
+        android:id="@+id/cl_topMenu"
         android:layout_width="match_parent"
         android:layout_height="150sp"
         android:background="@drawable/rectangle_2737"
@@ -104,9 +104,9 @@
             app:layout_constraintStart_toEndOf="@id/leftNavMain">
 
             <TextView
-                android:fontFamily="@font/poppins_light"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_light"
                 android:text="Price"
                 android:textColor="#D4D4D4"
                 android:textSize="8sp" />
@@ -151,7 +151,32 @@
 
         </LinearLayout>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+         android:layout_marginStart="20dp"
+        android:orientation="vertical"
+        android:id="@+id/ll_UnitRooms"
+        android:layout_width="match_parent"
+        android:layout_height="340dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_topMenu">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="AC Unit Rooms"
+            android:textColor="#D4D4D4"
+            android:textSize="16sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvUnitRooms"
+            android:layout_width="match_parent"
+            tools:listitem="@layout/ac_unit_item"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

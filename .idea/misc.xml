@@ -14,6 +14,7 @@
         <entry key="app/src/main/res/drawable/rounded_button.xml" value="0.2325" />
         <entry key="app/src/main/res/drawable/rounded_linear.xml" value="0.2325" />
         <entry key="app/src/main/res/drawable/setting.xml" value="0.2535" />
+        <entry key="app/src/main/res/layout/ac_unit_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_dash_board.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
