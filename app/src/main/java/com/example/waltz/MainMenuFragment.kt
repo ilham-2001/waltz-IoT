@@ -42,7 +42,12 @@ class MainMenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getDate()
+        // Set datetime textview
+        val calender = Calendar.getInstance().time
+        val formatter = SimpleDateFormat("EEE, dd MMM YYYY")
+        val formattedDate = formatter.format(calender)
+
+        binding.dateText.text = formattedDate
 
         val unitRoomList = ArrayList<UnitRoom>()
 
@@ -54,18 +59,17 @@ class MainMenuFragment : Fragment() {
         unitRoomList.add(UnitRoom("1.4", false, 10f, 2))
         unitRoomList.add(UnitRoom("Lab. Robotika", true, 50f, 2))
         unitRoomList.add(UnitRoom("Lab. Informatika Terpadu 3.2", false, 10f, 3))
-        unitRoomList.add(UnitRoom("Lab. Instrumentasi dan Sistem Kendali", false, 40f, 2))
+        unitRoomList.add(UnitRoom("Lab. Instrumentasi dan Kendali", true, 40f, 2))
+        unitRoomList.add(UnitRoom("Lab. Instrumentasi dan Kendali", true, 40f, 2))
 
+        // Set switch toggle change
+        binding.switchAllBtn.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                Log.d("Switch Val", "ON")
+            } else {
+                Log.d("Switch Val", "OFF")
+            }
+        }
         unitRoomAdapter.notifyDataSetChanged()
-
-        Log.d("Switch Val", binding.switchAllBtn.toString())
-    }
-
-    fun getDate() {
-        val calender = Calendar.getInstance().time
-        val formatter = SimpleDateFormat("EEE, dd MMM YYYY")
-        val formattedDate = formatter.format(calender)
-
-        binding.dateText.text = formattedDate
     }
 }

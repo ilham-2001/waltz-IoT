@@ -2,10 +2,11 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="141dp"
-    android:layout_height="142dp"
+    android:layout_width="151dp"
+    android:layout_height="152dp"
     android:layout_margin="5dp"
     app:cardBackgroundColor="#1E54EA"
+    android:id="@+id/cardAcUnit"
     app:cardCornerRadius="15dp"
     app:cardElevation="4dp">
 
@@ -46,22 +47,22 @@
 
         <TextView
             android:id="@+id/unitTextRoom"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/poppins_semibold"
-            android:text="04.B"
             android:textColor="#D4D4D4"
-            android:textSize="12sp"
+            android:textSize="9sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/acImage" />
+            app:layout_constraintTop_toBottomOf="@id/acImage"
+            tools:text="Lab.Robotika dan Inovasi" />
 
         <TextView
             android:id="@+id/countUnitRoom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
+            android:layout_marginStart="6dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/poppins_semibold"
             android:text="4 Unit"

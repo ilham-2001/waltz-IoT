@@ -9,7 +9,6 @@
         android:id="@+id/cv_cctv_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="50dp"
         app:cardElevation="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,8 +21,10 @@
         android:gravity="center">
 
         <ImageView
+            android:alpha="0.7"
             android:scaleType="fitXY"
             android:id="@+id/iv_screen"
+            android:src="@drawable/placeholder_monitoring"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
