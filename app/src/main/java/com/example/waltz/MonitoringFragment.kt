@@ -13,10 +13,14 @@ import android.widget.Toast
 import com.example.waltz.databinding.FragmentMonitoringBinding
 import org.eclipse.paho.android.service.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.*
-
+import com.example.waltzLib.MQTTClient
+import  kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 
 class MonitoringFragment : Fragment() {
     private lateinit var mqttClient: MqttAndroidClient
+    val serverURI = "tcp://broker.hivemq.com:1883"
+    val clientID = MqttClient.generateClientId()
 
     companion object {
         const val TAG = "AndroidMqttClient"
@@ -47,8 +51,9 @@ class MonitoringFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Connect to MQTT when everything is set up
-        val clientID = MqttClient.generateClientId()
-        connect(context, clientID)
+        val mqtt = MQTTClient(context, serverURI, clientID)
+        // mqtt.connect()
+        mqtt.subscribe("DIIBS/gambar_masker", 0)
     }
 
     override fun onDestroyView() {
@@ -56,10 +61,12 @@ class MonitoringFragment : Fragment() {
         _binding = null
     }
 
+    fun connectToServer(mqtt: MQTTClient) = runBlocking {
+        async { mqtt.connect() }
+    }
+
 
     private fun connect(context: Context?, clientID: String) {
-        val serverURI = "tcp://broker.hivemq.com:1883"
-        Log.d(TAG, context.toString())
         mqttClient = MqttAndroidClient(context, serverURI, clientID)
 
         try {
