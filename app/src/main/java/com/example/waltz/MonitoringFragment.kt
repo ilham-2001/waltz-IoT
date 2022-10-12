@@ -1,29 +1,26 @@
 package com.example.waltz
 
-import android.content.Context
-import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Base64
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.ImageView
+import androidx.cardview.widget.CardView
 import com.example.waltz.databinding.FragmentMonitoringBinding
-import org.eclipse.paho.android.service.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.*
 import com.example.waltzLib.MQTTClient
-import  kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
 
-class MonitoringFragment : Fragment() {
-    private lateinit var mqttClient: MqttAndroidClient
-    val serverURI = "tcp://broker.hivemq.com:1883"
-    val clientID = MqttClient.generateClientId()
+class MonitoringFragment : Fragment(), View.OnClickListener {
+    private val serverURI = "tcp://broker.hivemq.com:1883"
+    private val clientID: String = MqttClient.generateClientId()
+    private lateinit var mqtt: MQTTClient
 
     companion object {
         const val TAG = "AndroidMqttClient"
+        lateinit var frame: ImageView
+        lateinit var lightIndicator: CardView
     }
 
     // Life Cycle
@@ -51,9 +48,15 @@ class MonitoringFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Connect to MQTT when everything is set up
-        val mqtt = MQTTClient(context, serverURI, clientID)
-        // mqtt.connect()
-        mqtt.subscribe("DIIBS/gambar_masker", 0)
+        mqtt = MQTTClient(context, serverURI, this.javaClass.name, clientID)
+
+        frame = binding.ivScreen
+        lightIndicator = binding.connectIndicator
+
+        binding.leftControlAnalog.setOnClickListener(this)
+        binding.rightControlAnalog.setOnClickListener(this)
+
+        mqtt.connect()
     }
 
     override fun onDestroyView() {
@@ -61,59 +64,11 @@ class MonitoringFragment : Fragment() {
         _binding = null
     }
 
-    fun connectToServer(mqtt: MQTTClient) = runBlocking {
-        async { mqtt.connect() }
-    }
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.leftControlAnalog -> mqtt.publish("waltz/servoControl", "-5")
+            R.id.rightControlAnalog -> mqtt.publish("waltz/servoControl", "5")
 
-
-    private fun connect(context: Context?, clientID: String) {
-        mqttClient = MqttAndroidClient(context, serverURI, clientID)
-
-        try {
-            val token = mqttClient.connect()
-
-            token.actionCallback = object : IMqttActionListener {
-                override fun onSuccess(asyncActionToken: IMqttToken?) {
-                    Toast.makeText(context, "Connected", Toast.LENGTH_SHORT)
-                        .show()
-                    subscribe("DIIBS/gambar_masker", 0, mqttClient)
-                }
-
-                override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
-                    Log.d(TAG, "Error")
-                }
-
-            }
-        } catch (e: MqttException) {
-            Log.d(TAG, "Error when trying to connect")
         }
     }
-
-    private fun subscribe(topic: String, qos: Int, client: MqttAndroidClient) {
-        try {
-            client.subscribe(topic, qos)
-            client.setCallback(object : MqttCallback {
-                override fun connectionLost(cause: Throwable?) {
-                    // NOT IMPLEMENTED
-                }
-
-                override fun messageArrived(topic: String?, message: MqttMessage?) {
-                    if (topic == "DIIBS/gambar_masker") {
-                        val imageBytes = Base64.decode(message.toString(), Base64.DEFAULT)
-                        val bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-
-                        binding.ivScreen.setImageBitmap(bitmap)
-                    }
-                }
-
-                override fun deliveryComplete(token: IMqttDeliveryToken?) {
-                    // NOT IMPLEMENTED
-                }
-
-            })
-        } catch (e: MqttException) {
-            Log.e(TAG, "Error on retrieving message")
-        }
-    }
-
 }

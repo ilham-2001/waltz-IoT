@@ -9,7 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="secondary">#0E1A32</color>
     <color name="not_active">#112442</color>
-    <color name="active">#1E54EA</color>
+    <color name="active">#1E54EA</color> 3D8361
+    <color name="connected">#3D8361</color>
     <color name="secondary_transparent">#8B1A32C9</color>
     <color name="light_green">#25FD02</color>
     <color name="yellow_text">#E7DF31</color>

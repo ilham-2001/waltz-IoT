@@ -1,21 +1,46 @@
 package com.example.waltzLib
 
 import android.content.Context
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.util.Log
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import com.example.waltz.MainMenuFragment
+import com.example.waltz.MonitoringFragment
+import com.example.waltz.R
 import org.eclipse.paho.android.service.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.*
 
 class MQTTClient(
     context: Context?,
     serverUri: String,
+    namespace: String,
     clientID: String = ""
 ) {
-    private var mqttClient = MqttAndroidClient(context, serverUri, clientID)
+    private val mqttClient = MqttAndroidClient(context, serverUri, clientID)
 
     private val defaultCbConnect = object : IMqttActionListener {
         override fun onSuccess(asyncActionToken: IMqttToken?) {
-            Toast.makeText(context, "Connected", Toast.LENGTH_SHORT).show()
+
+            val origin = namespace.split('.')[3]
+
+            if (origin == "MonitoringFragment") {
+                MonitoringFragment.lightIndicator.setCardBackgroundColor(
+                    ContextCompat.getColor(
+                        context!!,
+                        R.color.connected
+                    )
+                )
+                subscribe("DIIBS/gambar_masker", 0)
+            } else if (origin == "MainMenuFragment") {
+                MainMenuFragment.lightIndicator.setCardBackgroundColor(
+                    ContextCompat.getColor(
+                        context!!,
+                        R.color.connected
+                    )
+                )
+            }
         }
 
         override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
@@ -29,22 +54,17 @@ class MQTTClient(
         }
 
         override fun messageArrived(topic: String?, message: MqttMessage?) {
+            if (topic == "DIIBS/gambar_masker") {
+                val imageBytes = Base64.decode(message.toString(), Base64.DEFAULT)
+                val bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+
+                MonitoringFragment.frame.setImageBitmap(bitmap)
+            }
             Log.d(this.javaClass.name, "Message is arrived")
         }
 
         override fun deliveryComplete(token: IMqttDeliveryToken?) {
             Log.d(this.javaClass.name, "Message is sent")
-        }
-
-    }
-
-    private val defaultSubscribe = object : IMqttActionListener {
-        override fun onSuccess(asyncActionToken: IMqttToken?) {
-            Log.d("Subs", "Message is success to catch")
-        }
-
-        override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
-            Log.d("Subs", "Message is failed to catch")
         }
 
     }
@@ -70,10 +90,22 @@ class MQTTClient(
     fun subscribe(
         topic: String,
         qos: Int,
-        cbSubscribe: IMqttActionListener = defaultSubscribe
     ) {
         try {
-            mqttClient.subscribe(topic, qos, null, cbSubscribe)
+            mqttClient.subscribe(topic, qos)
+        } catch (e: MqttException) {
+            e.printStackTrace()
+        }
+    }
+
+    fun publish(
+        topic: String,
+        message: String
+    ) {
+        try {
+            val payload = message.toByteArray()
+            mqttClient.publish(topic, payload, 0, false)
+            Log.d("MQTTClient", "Masuk")
         } catch (e: MqttException) {
             e.printStackTrace()
         }

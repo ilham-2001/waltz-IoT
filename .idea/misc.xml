@@ -21,8 +21,8 @@
         <entry key="app/src/main/res/layout/activity_main_menu.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_starting.xml" value="0.2949978623343309" />
         <entry key="app/src/main/res/layout/activity_starting_menu.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_main_menu.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/fragment_monitoring.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_main_menu.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_monitoring.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.33" />
         <entry key="app/src/main/res/layout/usage_history_template.xml" value="0.33" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
