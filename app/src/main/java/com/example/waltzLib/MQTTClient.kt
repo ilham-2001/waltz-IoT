@@ -104,8 +104,7 @@ class MQTTClient(
     ) {
         try {
             val payload = message.toByteArray()
-            mqttClient.publish(topic, payload, 0, false)
-            Log.d("MQTTClient", "Masuk")
+            mqttClient.publish(topic, payload, 1, false)
         } catch (e: MqttException) {
             e.printStackTrace()
         }

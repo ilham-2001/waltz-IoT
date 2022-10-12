@@ -51,9 +51,12 @@ class UnitRoomsAdapter(
         }
 
         holder.acSwitch.setOnCheckedChangeListener { _, isChecked ->
-            Log.d("Adapter", isChecked.toString())
+            mqttClient.publish(
+                "waltz/power${unitRoomsList[position].roomOrigin}",
+                isChecked.toString()
+            )
+
             if (isChecked) {
-                mqttClient.publish("waltz/power${unitRoomsList[position].roomOrigin}", "ON")
                 holder.cvHolder.setCardBackgroundColor(
                     ContextCompat.getColor(
                         context,
@@ -61,8 +64,6 @@ class UnitRoomsAdapter(
                     )
                 )
             } else {
-                Log.d("Adapter", "ON")
-                mqttClient.publish("waltz/power/${unitRoomsList[position].roomOrigin}", "OFF")
                 holder.cvHolder.setCardBackgroundColor(
                     ContextCompat.getColor(
                         context,

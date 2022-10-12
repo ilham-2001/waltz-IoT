@@ -76,11 +76,7 @@ class MainMenuFragment : Fragment() {
 
         // Set switch toggle change
         binding.switchAllBtn.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                mqtt.publish("waltz/powerAll", "ON")
-            } else {
-                mqtt.publish("waltz/powerAll", "OFF")
-            }
+            mqtt.publish("waltz/powerAll", isChecked.toString())
         }
         unitRoomAdapter.notifyDataSetChanged()
     }
