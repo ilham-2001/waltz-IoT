@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/secondary">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/connectIndicator"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:cardBackgroundColor="#EB1D36"
+        android:translationZ="20dp"
+        app:cardCornerRadius="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_cctv_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardElevation="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_screen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.75"
+                android:scaleType="fitXY"
+                android:src="@drawable/placeholder_monitoring" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:translationZ="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/leftControlAnalog"
+            android:layout_width="14dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/control_left" />
+
+        <ImageView
+            android:layout_width="51dp"
+            android:layout_height="51dp"
+            android:src="@drawable/analog_control" />
+
+        <ImageView
+            android:id="@+id/rightControlAnalog"
+            android:layout_width="14dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/control_right" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
