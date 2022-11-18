@@ -12,7 +12,7 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/waltz_icon"
-        android:label="Waltz"
+        android:label="DIIBS"
         android:roundIcon="@mipmap/waltz_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Waltz"

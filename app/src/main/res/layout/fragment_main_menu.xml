@@ -146,6 +146,7 @@
             app:layout_constraintStart_toEndOf="@id/leftNavMain">
 
             <TextView
+                android:layout_gravity="bottom"
                 android:id="@+id/switchAllText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

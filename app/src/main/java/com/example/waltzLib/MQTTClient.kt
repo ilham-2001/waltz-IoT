@@ -32,7 +32,7 @@ class MQTTClient(
                         R.color.connected
                     )
                 )
-                subscribe("DIIBS/gambar_masker", 0)
+                subscribe("waltz/camFrame", 0)
             } else if (origin == "MainMenuFragment") {
                 MainMenuFragment.lightIndicator.setCardBackgroundColor(
                     ContextCompat.getColor(
@@ -54,7 +54,7 @@ class MQTTClient(
         }
 
         override fun messageArrived(topic: String?, message: MqttMessage?) {
-            if (topic == "DIIBS/gambar_masker") {
+            if (topic == "waltz/camFrame") {
                 val imageBytes = Base64.decode(message.toString(), Base64.DEFAULT)
                 val bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
 
